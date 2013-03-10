@@ -1,0 +1,154 @@
+/* 
+Title:		CSS/JS Clock
+Author: 	Daniel Ott 
+            http://dtott.com
+            http://twitter.com/danieltott
+            
+Copyright:	2013, Daniel T Ott, LLC., under the Creative Commons Attribution 3.0 License
+    http://creativecommons.org/licenses/by/3.0/
+    This means you are free
+        to Share — to copy, distribute and transmit the work
+        to Remix — to adapt the work
+    Under the following conditions:
+        Attribution — You must attribute the work back to me (Daniel Ott) with a link to my site (http://dtott.com)
+        
+        
+
+*/
+
+/* meyer reset */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent; }
+ol, ul { list-style: none; }
+blockquote, q { quotes: none; }
+blockquote:before, blockquote:after, q:before, q:after { content: ''; content: none; }
+:focus { outline: 0; }
+ins { text-decoration: none; }
+del { text-decoration: line-through; }
+table { border-collapse: collapse; border-spacing: 0; }
+body{ background: #333; color: #fff; font-family: Tahoma, Helvetica, sans-serif; font-size: 14px; height: 14px; }
+
+.error { font-size: .8em; }
+.notice{ background: #C5B8A5; color: #333; padding: 10px; margin: 20px; border: 3px solid #732918; border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; }
+.notice a{ color: #732918; font-weight: bold; text-decoration: none; }
+
+#w{ width: 800px; height: 800px; position: relative; margin: 50px auto; }
+
+/* extra (unsupported) vendor extensions added just to be sure based on reader comment */
+
+
+.rotate(@deg) {
+    -webkit-transform: rotate(unit(@deg,deg));
+    -moz-transform: rotate(unit(@deg,deg));
+    -o-transform: rotate(unit(@deg,deg));
+    -khtml-transform: rotate(unit(@deg,deg));
+    -ms-transform: rotate(unit(@deg,deg));
+    -icab-transform: rotate(unit(@deg,deg));
+    transform: rotate(unit(@deg,deg));
+}
+
+.transform-origin(@origin) {
+    -webkit-transform-origin: @origin;
+    -moz-transform-origin: @origin; 
+    -o-transform-origin: @origin;
+    -khtml-transform-origin: @origin; 
+    -ms-transform-origin: @origin;
+    -icab-transform-origin: @origin;
+    transform-origin: @origin; 
+}
+
+
+
+
+#hoursW,
+#minutesW,
+#secondsW {
+    position: absolute;
+    left:0;
+    top: 0;
+    width: 800px;
+    height: 800px; 
+    .transform-origin(center center);
+}
+
+#hours,
+#minutes,
+#seconds {
+    position: absolute;
+    left: 400px;
+    top: 393px;
+}
+
+li {
+    position: absolute;
+    width: 150px;
+    text-transform: lowercase;
+    .transform-origin(0 center);
+    color: rgba(255,255,255,.1);
+    position: absolute; left: 0; top: 0;
+
+    span{ display: block; }
+    
+    span span{ display: none; }
+
+    &.active {
+        color: #58aef0;
+        font-size: 14px;
+        
+        span {
+            display: block;
+        }
+        
+        span span{
+            display: inline;
+        }
+
+        span .am,
+        li.active span .pm{
+            display: none;
+        }
+        
+        .am li.active span .am,
+        .pm li.active span .pm{
+            display: inline;
+        }
+    }
+}
+
+#hours > li {
+    padding: 0 0 0 80px;
+}
+
+#minutes > li {
+    padding: 0 0 0 130px;
+}
+
+#seconds > li {
+    padding: 0 0 0 270px;
+}
+
+.hour(@index) {
+    .rotate(((@index * 30) - 90));
+}
+
+.hoursX (@index) when (@index > 0) {
+    (~"#hours > li:nth-child(@{index})") { .hour(@index); }
+    .hoursX(@index - 1);
+}
+
+.hoursX (0) {}
+
+.minsec(@index) {
+    .rotate((@index * 6) - 90);
+}
+
+.minsecX (@index) when (@index > 0) {
+    (~"#minutes > li:nth-child(@{index}),#seconds > li:nth-child(@{index})") { .minsec(@index); }
+    .minsecX(@index - 1);
+}
+
+.minsecX (0) {}
+
+.hoursX(12);
+
+.minsecX(60);
