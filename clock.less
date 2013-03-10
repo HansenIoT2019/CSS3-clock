@@ -16,6 +16,9 @@ Copyright:	2013, Daniel T Ott, LLC., under the Creative Commons Attribution 3.0 
 
 */
 
+
+@import "Less-CSS-Toolkit/toolkit.less";
+
 /* meyer reset */
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
 margin: 0; padding: 0; border: 0; outline: 0; font-size: 100%; vertical-align: baseline; background: transparent; }
@@ -37,25 +40,7 @@ body{ background: #333; color: #fff; font-family: Tahoma, Helvetica, sans-serif;
 /* extra (unsupported) vendor extensions added just to be sure based on reader comment */
 
 
-.rotate(@deg) {
-    -webkit-transform: rotate(unit(@deg,deg));
-    -moz-transform: rotate(unit(@deg,deg));
-    -o-transform: rotate(unit(@deg,deg));
-    -khtml-transform: rotate(unit(@deg,deg));
-    -ms-transform: rotate(unit(@deg,deg));
-    -icab-transform: rotate(unit(@deg,deg));
-    transform: rotate(unit(@deg,deg));
-}
 
-.transform-origin(@origin) {
-    -webkit-transform-origin: @origin;
-    -moz-transform-origin: @origin; 
-    -o-transform-origin: @origin;
-    -khtml-transform-origin: @origin; 
-    -ms-transform-origin: @origin;
-    -icab-transform-origin: @origin;
-    transform-origin: @origin; 
-}
 
 
 
@@ -85,11 +70,19 @@ li {
     text-transform: lowercase;
     .transform-origin(0 center);
     color: rgba(255,255,255,.1);
-    position: absolute; left: 0; top: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
 
-    span{ display: block; }
+    span{
+        display: block;
+        .transition(all 0.3s ease-out 0s);
+    }
     
-    span span{ display: none; }
+    span span{
+        opacity: 0;
+        display: inline;
+    }
 
     &.active {
         color: #58aef0;
@@ -97,23 +90,27 @@ li {
         
         span {
             display: block;
+            .transition(all 0s ease-out 0s);
         }
         
         span span{
+            opacity: 1;
             display: inline;
         }
 
         span .am,
-        li.active span .pm{
+        span .pm{
             display: none;
         }
-        
-        .am li.active span .am,
-        .pm li.active span .pm{
-            display: inline;
-        }
     }
+}        
+.am li.active span .am,
+.pm li.active span .pm{
+    opacity: 1;
+    display: inline;
 }
+
+
 
 #hours > li {
     padding: 0 0 0 80px;
@@ -128,7 +125,13 @@ li {
 }
 
 .hour(@index) {
-    .rotate(((@index * 30) - 90));
+    .transform(
+        rotate(
+            unit(
+                ((@index * 30) - 90),deg
+            )
+        )
+    );
 }
 
 .hoursX (@index) when (@index > 0) {
@@ -139,7 +142,13 @@ li {
 .hoursX (0) {}
 
 .minsec(@index) {
-    .rotate((@index * 6) - 90);
+    .transform(
+        rotate(
+            unit(
+                ((@index * 6) - 90),deg
+            )
+        )
+    );
 }
 
 .minsecX (@index) when (@index > 0) {
