@@ -28,6 +28,10 @@ del { text-decoration: line-through; }
 table { border-collapse: collapse; border-spacing: 0; }
 body{ background: #333; color: #fff; font-family: Tahoma, Helvetica, sans-serif; font-size: 14px; height: 14px; }
 
+.error { font-size: .8em; }
+.notice{ background: #C5B8A5; color: #333; padding: 10px; margin: 20px; border: 3px solid #732918; border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radius: 10px; }
+.notice a{ color: #732918; font-weight: bold; text-decoration: none; }
+
 #w{ width: 800px; height: 800px; position: relative; margin: 50px auto; }
 
 /* extra (unsupported) vendor extensions added just to be sure based on reader comment */
