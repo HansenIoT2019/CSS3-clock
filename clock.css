@@ -202,6 +202,10 @@ li span span {
   opacity: 0;
   display: inline;
 }
+li span .am,
+li span .pm {
+  display: none;
+}
 li.active {
   color: #58aef0;
   font-size: 14px;
@@ -217,10 +221,6 @@ li.active span {
 li.active span span {
   opacity: 1;
   display: inline;
-}
-li.active span .am,
-li.active span .pm {
-  display: none;
 }
 .am li.active span .am,
 .pm li.active span .pm {
