@@ -7,10 +7,10 @@ Author: 	Daniel Ott
 Copyright:	2013, Daniel T Ott, LLC., under the Creative Commons Attribution 3.0 License
     http://creativecommons.org/licenses/by/3.0/
     This means you are free
-        to Share � to copy, distribute and transmit the work
-        to Remix � to adapt the work
+        to Share - to copy, distribute and transmit the work
+        to Remix - to adapt the work
     Under the following conditions:
-        Attribution � You must attribute the work back to me (Daniel Ott) with a link to my site (http://dtott.com)
+        Attribution - You must attribute the work back to me (Daniel Ott) with a link to my site (http://dtott.com)
         
         
 
@@ -202,6 +202,10 @@ li span span {
   opacity: 0;
   display: inline;
 }
+li span .am,
+li span .pm {
+  display: none;
+}
 li.active {
   color: #58aef0;
   font-size: 14px;
@@ -217,10 +221,6 @@ li.active span {
 li.active span span {
   opacity: 1;
   display: inline;
-}
-li.active span .am,
-li.active span .pm {
-  display: none;
 }
 .am li.active span .am,
 .pm li.active span .pm {
